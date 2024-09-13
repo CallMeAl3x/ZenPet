@@ -39,3 +39,9 @@ yarn-error.*
 
 .stfolder
 .stignore
+
+# IntelliJ
+.idea/
+
+# EAS configuration
+eas.json
