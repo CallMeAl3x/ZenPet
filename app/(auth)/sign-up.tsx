@@ -44,7 +44,6 @@ const SignUp = () => {
   const submit = async () => {
     const stepErrors = validateStep2(form);
     if (Object.keys(stepErrors).length > 0) {
-      console.log("Validation errors:", stepErrors);
       setErrors(stepErrors);
       return;
     }

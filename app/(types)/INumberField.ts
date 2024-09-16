@@ -5,4 +5,5 @@ export interface INumberField {
   handleChangeText: (text: string) => void;
   otherStyles?: string;
   error?: string;
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
-import { INumberField } from "../../types/INumberField";
+import { INumberField } from "../../app/(types)/INumberField";
 
 const NumberField: React.FC<INumberField> = ({
   title,

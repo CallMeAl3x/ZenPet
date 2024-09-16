@@ -7,7 +7,7 @@ export const validateStep1 = (form: {
   password?: string;
   confirmPassword?: string;
 }) => {
-  const errors = {};
+  const errors: { email?: string } = {};
   if (!form.email) {
     errors.email = "L'email est requis";
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
@@ -17,15 +17,22 @@ export const validateStep1 = (form: {
 };
 
 export const validateStep2 = (form: {
-  firstName: any;
-  lastName: any;
+  firstName: string;
+  lastName: string;
   birthdayDate: any;
-  username: any;
+  username: string;
   email?: string;
-  password: any;
+  password: string;
   confirmPassword: any;
 }) => {
-  const errors = {};
+  const errors: {
+    firstName?: string;
+    lastName?: string;
+    birthdayDate?: string;
+    username?: string;
+    password?: string;
+    confirmPassword?: string;
+  } = {};
   if (!form.firstName) errors.firstName = "Le prénom est requis";
   if (!form.lastName) errors.lastName = "Le nom est requis";
   if (!form.birthdayDate) {

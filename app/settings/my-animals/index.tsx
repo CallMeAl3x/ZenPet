@@ -11,7 +11,12 @@ import {
   Alert,
 } from "react-native";
 import { useGlobalContext } from "../../../context/GlobalProvider";
-import { getUserPets, addPet, updatePet } from "../../../lib/appwrite";
+import {
+  getUserPets,
+  addPet,
+  updatePet,
+  deletePet,
+} from "../../../lib/appwrite";
 import { icons } from "../../../constants";
 import TextField from "../../../components/fields/TextField";
 import DateTimeField from "../../../components/fields/DateTimeField";
@@ -19,20 +24,21 @@ import NumberField from "../../../components/fields/NumberField";
 import GoBackButton from "../../../components/GoBackButton";
 
 const MyAnimals = () => {
-  const [pets, setPets] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [form, setForm] = useState({
+  const [pets, setPets] = useState<Pet[]>([]);
+  const [form, setForm] = useState<PetForm>({
     type: "",
     name: "",
     weight: "",
     birthdayDate: "",
     trait: "",
   });
-  const [selectedType, setSelectedType] = useState(null);
-  const [selectedTraits, setSelectedTraits] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedTraits, setSelectedTraits] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [editingPetId, setEditingPetId] = useState(null);
+  const [editingPetId, setEditingPetId] = useState<string>();
   const traits = ["Solitaire", "Sociable", "Tolérant"];
 
   const { user } = useGlobalContext();
@@ -44,7 +50,7 @@ const MyAnimals = () => {
   const fetchPets = async () => {
     if (user) {
       try {
-        const userPets = await getUserPets(user.$id);
+        const userPets: Pet[] = await getUserPets(user.$id);
         setPets(userPets);
       } catch (error) {
         console.error("Error fetching pets:", error);
@@ -54,7 +60,7 @@ const MyAnimals = () => {
     }
   };
 
-  const renderPetItem = ({ item }) => (
+  const renderPetItem = ({ item }: { item: Pet }) => (
     <View className="bg-white rounded-lg shadow-md p-4 mb-4">
       {item.image && (
         <Image
@@ -63,11 +69,11 @@ const MyAnimals = () => {
         />
       )}
       <Text className="text-lg font-bold">{item.name}</Text>
-      <Text className="text-gray-600">Type: {item.type}</Text>
-      <Text className="text-gray-600">Weight: {item.weight} kg</Text>
-      <Text className="text-gray-600">Trait: {item.trait}</Text>
+      <Text className="text-gray-600">Type : {item.type}</Text>
+      <Text className="text-gray-600">Poids : {item.weight} kg</Text>
+      <Text className="text-gray-600">Trait : {item.trait}</Text>
       <Text className="text-gray-600">
-        Birthday: {new Date(item.birthdayDate).toLocaleDateString()}
+        Date de naissance: {new Date(item.birthdayDate).toLocaleDateString()}
       </Text>
       <TouchableOpacity
         onPress={() => handleEditPet(item)}
@@ -78,12 +84,12 @@ const MyAnimals = () => {
     </View>
   );
 
-  const handleEditPet = (pet) => {
+  const handleEditPet = (pet: Pet) => {
     setForm({
       type: pet.type,
       name: pet.name,
       weight: pet.weight.toString(),
-      birthdayDate: new Date(pet.birthdayDate).toLocaleDateString(),
+      birthdayDate: new Date(pet.birthdayDate).toISOString(),
       trait: pet.trait,
     });
     setSelectedType(pet.type);
@@ -91,14 +97,26 @@ const MyAnimals = () => {
     setEditingPetId(pet.$id);
     setModalVisible(true);
   };
-
-  const handleTypeSelection = (type) => {
+  const handleTypeSelection = (type: string) => {
     setSelectedType(type);
     setForm({ ...form, type });
   };
 
-  const handleTraitSelection = (trait) => {
-    let newTraits;
+  const handleDeletePet = async () => {
+    if (!editingPetId) return;
+    try {
+      await deletePet(editingPetId);
+      Alert.alert("Succès", "Votre animal de compagnie a été supprimé !");
+      setModalVisible(false);
+      fetchPets();
+      resetForm();
+    } catch (error) {
+      Alert.alert("Erreur", (error as Error).message);
+    }
+  };
+
+  const handleTraitSelection = (trait: string) => {
+    let newTraits: string[];
     if (selectedTraits.includes(trait)) {
       newTraits = selectedTraits.filter((t) => t !== trait);
     } else {
@@ -133,7 +151,7 @@ const MyAnimals = () => {
       fetchPets(); // Refresh the pet list
       resetForm();
     } catch (error) {
-      Alert.alert("Erreur", error.message);
+      Alert.alert("Erreur", (error as Error).message);
     } finally {
       setIsSubmitting(false);
     }
@@ -147,9 +165,9 @@ const MyAnimals = () => {
       birthdayDate: "",
       trait: "",
     });
-    setSelectedType(null);
+    setSelectedType("null");
     setSelectedTraits([]);
-    setEditingPetId(null);
+    setEditingPetId(undefined);
   };
 
   return (
@@ -214,17 +232,17 @@ const MyAnimals = () => {
 
               <View className="flex-row justify-between mb-4">
                 <TouchableOpacity
-                  onPress={() => handleTypeSelection("dog")}
+                  onPress={() => handleTypeSelection("chien")}
                   className={`bg-gray-200 p-3 rounded-2xl flex items-center justify-center px-7 ${
-                    selectedType === "dog" ? "border-2 border-secondary" : ""
+                    selectedType === "chien" ? "border-2 border-secondary" : ""
                   }`}
                 >
                   <Image source={icons.dog} className="w-[30px] h-[30px]" />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => handleTypeSelection("cat")}
+                  onPress={() => handleTypeSelection("chat")}
                   className={`bg-gray-200 p-3 rounded-2xl flex items-center justify-center px-7 ${
-                    selectedType === "cat" ? "border-2 border-secondary" : ""
+                    selectedType === "chat" ? "border-2 border-secondary" : ""
                   }`}
                 >
                   <Image source={icons.cat} className="w-[30px] h-[30px]" />
@@ -251,7 +269,6 @@ const MyAnimals = () => {
               <View className="mb-4">
                 <Text className="text-black font-medium mb-2">Poids (kg)</Text>
                 <NumberField
-                  title="Poids"
                   value={form.weight}
                   handleChangeText={(newWeight) => {
                     setForm({
@@ -320,6 +337,22 @@ const MyAnimals = () => {
                     : "Ajouter l'animal"}
                 </Text>
               </TouchableOpacity>
+
+              {editingPetId && (
+                <TouchableOpacity
+                  onPress={handleDeletePet}
+                  disabled={isSubmitting}
+                  className={`bg-red-600 py-3 rounded-lg mt-4 ${
+                    isSubmitting ? "opacity-50" : ""
+                  }`}
+                >
+                  <Text className="text-white font-bold text-center">
+                    {isSubmitting
+                      ? "Traitement en cours..."
+                      : "Supprimer l'animal"}
+                  </Text>
+                </TouchableOpacity>
+              )}
 
               <TouchableOpacity
                 onPress={() => {

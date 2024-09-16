@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { icons } from "../../constants";
-import { INumberField } from "../../types/INumberField";
+import { INumberField } from "../../app/(types)/INumberField";
 
 const PasswordField: React.FC<INumberField> = ({
   title,

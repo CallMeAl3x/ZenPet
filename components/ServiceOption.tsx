@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { IServiceOption } from "../types/IServiceOption";
+import { IServiceOption } from "../app/(types)/IServiceOption";
 
 const ServiceOption: React.FC<IServiceOption> = ({
   texte,

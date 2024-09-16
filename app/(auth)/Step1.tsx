@@ -5,7 +5,21 @@ import { Link, router } from "expo-router";
 import { checkEmailExists } from "../../lib/appwrite";
 import TextField from "../../components/fields/TextField";
 
-const Step1 = ({ form, setForm, errors, isSubmitting, nextStep }) => {
+interface Step1Props {
+  form: any;
+  setForm: any;
+  errors: any;
+  isSubmitting: boolean;
+  nextStep: () => void;
+}
+
+const Step1 = ({
+  form,
+  setForm,
+  errors,
+  isSubmitting,
+  nextStep,
+}: Step1Props) => {
   const [isCheckingEmail, setIsCheckingEmail] = useState(false);
 
   const handleNextStep = async () => {
@@ -17,7 +31,6 @@ const Step1 = ({ form, setForm, errors, isSubmitting, nextStep }) => {
     setIsCheckingEmail(true);
     try {
       const emailExists = await checkEmailExists(form.email.toLowerCase());
-      console.log("Email exists:", emailExists);
 
       if (emailExists) {
         Alert.alert(
@@ -31,7 +44,6 @@ const Step1 = ({ form, setForm, errors, isSubmitting, nextStep }) => {
             {
               text: "Se connecter",
               onPress: () => {
-                console.log("Redirecting to sign-in");
                 setTimeout(() => {
                   router.replace("/sign-in");
                 }, 100);
@@ -47,7 +59,7 @@ const Step1 = ({ form, setForm, errors, isSubmitting, nextStep }) => {
       Alert.alert(
         "Erreur",
         "Une erreur est survenue lors de la vérification de l'email: " +
-          error.message
+          (error as Error).message
       );
     } finally {
       setIsCheckingEmail(false);

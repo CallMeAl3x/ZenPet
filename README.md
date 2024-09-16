@@ -28,9 +28,9 @@ ZenPet is a mobile application designed to help pet owners manage their pets' in
 ## Usage
 
 To run the app on any platform (Android, iOS, or web):
-    ```sh
+`sh
     npx expo start
-    ```
+    `
 
 ## Project Structure
 
@@ -38,18 +38,20 @@ To run the app on any platform (Android, iOS, or web):
 
 - [ ] Do the Alimentation part
 - [ ] Improve UI/UX design
-- [ ] Being able to delete pets
 - [ ] Messages part
 - [ ] Services part
 - [ ] Subscription part
-- [ ] Being able to change personnal informations (like password, nickname, etc)
+- [ ] Make a email verification system
 - [ ] Optimize performance
 
 ## WHATS DONE
 
+- [x] Being able to delete pets
+- [x] Being able to change personnal informations (like password, nickname, etc)
 - [x] Implement user authentication
 - [x] Being able to update/add pets
 - [x] Being able to navigate easily
+- [x] Make it typesafe
 
 ## Contributing
 

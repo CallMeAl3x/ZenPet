@@ -2,7 +2,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View } from "react-native";
 
 import { SearchInput } from "../../components";
-import { useEffect } from "react";
 
 const Alimentation = () => {
   return (

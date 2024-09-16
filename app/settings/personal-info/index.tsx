@@ -13,7 +13,36 @@ import DateTimeField from "../../../components/fields/DateTimeField";
 import { getCurrentUser, updateUser } from "../../../lib/appwrite";
 import Toast from "react-native-toast-message";
 
+type FormData = {
+  userId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  birthDate: string;
+};
+
+type Errors = {
+  [key: string]: string | undefined;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  username?: string;
+  birthDate?: string;
+};
+
+const formData: FormData = {
+  userId: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  username: "",
+  birthDate: "",
+};
+
 const PersonalInfo = () => {
+  const newErrors: Errors = {};
+
   const [formData, setFormData] = useState({
     userId: "",
     firstName: "",
@@ -49,16 +78,15 @@ const PersonalInfo = () => {
     }
   };
 
-  const handleChange = (field, value) => {
+  const handleChange = (field: string, value: string) => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
-    if (errors[field]) {
+    if (newErrors[field]) {
       setErrors((prevErrors) => ({ ...prevErrors, [field]: null }));
     }
   };
 
   const handleSubmit = async () => {
-    // Basic validation
-    const newErrors = {};
+    const newErrors: Errors = {};
     if (!formData.firstName) newErrors.firstName = "First name is required";
     if (!formData.lastName) newErrors.lastName = "Last name is required";
     if (!formData.email) newErrors.email = "Email is required";
@@ -75,11 +103,12 @@ const PersonalInfo = () => {
     try {
       const updatedUser = await updateUser({
         userId: formData.userId,
-        email: formData.email,
-        username: formData.username,
         firstName: formData.firstName,
         lastName: formData.lastName,
+        email: formData.email,
+        username: formData.username,
         birthdayDate: formData.birthDate,
+        avatar: null, // Add the 'avatar' property with a default value
       });
 
       if (updatedUser) {
@@ -97,7 +126,7 @@ const PersonalInfo = () => {
         type: "error",
         text1: "Error",
         text2:
-          error.message ||
+          (error as Error).message ||
           "Vos informations n'ont pas pu être mise à jour réessayez plus tard",
       });
     } finally {
@@ -123,7 +152,7 @@ const PersonalInfo = () => {
             placeholder=""
             value={formData.firstName}
             handleChangeText={(text) => handleChange("firstName", text)}
-            error={errors.firstName}
+            error={newErrors.firstName}
             otherStyles="mt-1"
           />
           <Text className="font-rsemibold text-lg text-white mb-1 mt-3">
@@ -133,7 +162,7 @@ const PersonalInfo = () => {
             placeholder=""
             value={formData.lastName}
             handleChangeText={(text) => handleChange("lastName", text)}
-            error={errors.lastName}
+            error={newErrors.lastName}
             otherStyles="mt-3"
           />
           <Text className="font-rsemibold text-lg text-white mb-1 mt-3">
@@ -143,7 +172,7 @@ const PersonalInfo = () => {
             placeholder=""
             value={formData.email}
             handleChangeText={(text) => handleChange("email", text)}
-            error={errors.email}
+            error={newErrors.email}
             otherStyles="mt-3"
           />
           <Text className="font-rsemibold text-lg text-white mb-1 mt-3">
@@ -153,7 +182,7 @@ const PersonalInfo = () => {
             placeholder=""
             value={formData.birthDate}
             handleChangeText={(date) => handleChange("birthDate", date)}
-            error={errors.birthDate}
+            error={newErrors.birthDate}
             otherStyles="mt-3"
             checkAdult={true}
           />

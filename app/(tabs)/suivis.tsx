@@ -13,7 +13,6 @@ import {
 } from "react-native";
 
 import { icons } from "../../constants";
-import { createVideoPost } from "../../lib/appwrite";
 import { CustomButton } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
@@ -53,39 +52,6 @@ const Suivis = () => {
       setTimeout(() => {
         Alert.alert("Document picked", JSON.stringify(result, null, 2));
       }, 100);
-    }
-  };
-
-  const submit = async () => {
-    if (
-      (form.prompt === "") |
-      (form.title === "") |
-      !form.thumbnail |
-      !form.video
-    ) {
-      return Alert.alert("Please provide all fields");
-    }
-
-    setUploading(true);
-    try {
-      await createVideoPost({
-        ...form,
-        userId: user.$id,
-      });
-
-      Alert.alert("Success", "Post uploaded successfully");
-      router.push("/alimentation");
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    } finally {
-      setForm({
-        title: "",
-        video: null,
-        thumbnail: null,
-        prompt: "",
-      });
-
-      setUploading(false);
     }
   };
 
@@ -169,7 +135,6 @@ const Suivis = () => {
 
         <CustomButton
           title="Submit & Publish"
-          handlePress={submit}
           containerStyles="mt-7"
           isLoading={uploading}
         />

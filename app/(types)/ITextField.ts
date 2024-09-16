@@ -5,4 +5,5 @@ export interface ITextField {
   placeholder?: string;
   otherStyles?: string;
   error?: string;
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
 }

@@ -33,7 +33,7 @@ const SignIn = () => {
       Alert.alert("Success", "User signed in successfully");
       router.replace("/alimentation");
     } catch (error) {
-      Alert.alert("Error", error.message);
+      Alert.alert("Error", (error as Error).message);
     } finally {
       setSubmitting(false);
     }

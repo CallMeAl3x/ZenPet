@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 import { icons } from "../../constants";
-import { IDateTimeField } from "../../types/IDateTimeField";
+import { IDateTimeField } from "../../app/(types)/IDateTimeField";
 
 const DateTimeField: React.FC<IDateTimeField> = ({
   value,
@@ -35,11 +35,15 @@ const DateTimeField: React.FC<IDateTimeField> = ({
   };
 
   const formatDateForDisplay = (dateStr: string | number | Date) => {
-    const date = new Date(dateStr); // Convertit la chaîne ISO en objet Date
+    if (!dateStr) return "Invalid Date"; // Handle empty or invalid date strings
+
+    const date = new Date(dateStr); // Convert the string to a Date object
+    if (isNaN(date.getTime())) return "Invalid Date"; // Check if the date is valid
+
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`; // Affiche le format JJ/MM/AAAA
+    return `${day}/${month}/${year}`; // Display the date in DD/MM/YYYY format
   };
 
   const isAdult = (date: string | number | Date) => {

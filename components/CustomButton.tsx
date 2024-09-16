@@ -6,7 +6,7 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { ICustomButton } from "../types/ICustomButton";
+import { ICustomButton } from "../app/(types)/ICustomButton";
 
 const CustomButton: React.FC<ICustomButton> = ({
   title,

@@ -10,12 +10,13 @@ import {
 import { CustomButton } from "../../components";
 import { icons } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { addPet } from "../../lib/appwrite";
+import { addPet, getCurrentUser } from "../../lib/appwrite";
 import NumberField from "../../components/fields/NumberField";
 import TextField from "../../components/fields/TextField";
 import DateTimeField from "../../components/fields/DateTimeField";
+import { useRouter } from "expo-router";
 
-const Step3 = ({ nextStep }) => {
+const Step3 = ({ nextStep }: { nextStep: () => void }) => {
   const [form, setForm] = useState({
     type: "",
     name: "",
@@ -23,19 +24,25 @@ const Step3 = ({ nextStep }) => {
     birthdayDate: "",
     trait: "",
   });
-  const [selectedType, setSelectedType] = useState(null);
-  const [selectedTraits, setSelectedTraits] = useState([]);
-  const [setIsSubmitting] = useState(false);
+  const [selectedType, setSelectedType] = useState<string>("");
+  const [selectedTraits, setSelectedTraits] = useState<string[]>([]);
+
+  const router = useRouter();
 
   const { user, setIsLogged } = useGlobalContext();
 
-  const handleTypeSelection = (type) => {
+  const skipStep = async () => {
+    setIsLogged(true); // Set isLogged to true after completing Step 3
+    router.replace("/alimentation");
+  };
+
+  const handleTypeSelection = (type: string) => {
     setSelectedType(type);
     setForm({ ...form, type });
   };
 
-  const handleTraitSelection = (trait) => {
-    let newTraits;
+  const handleTraitSelection = (trait: string) => {
+    let newTraits: string[];
     if (selectedTraits.includes(trait)) {
       newTraits = selectedTraits.filter((t) => t !== trait);
     } else {
@@ -59,7 +66,6 @@ const Step3 = ({ nextStep }) => {
       return;
     }
 
-    setIsSubmitting(true);
     try {
       await addPet(form, user.$id);
       Alert.alert(
@@ -69,9 +75,7 @@ const Step3 = ({ nextStep }) => {
       setIsLogged(true); // Set isLogged to true after completing Step 3
       router.replace("/alimentation"); // Redirect to home after completing Step 3
     } catch (error) {
-      Alert.alert("Erreur", error.message);
-    } finally {
-      setIsSubmitting(false);
+      Alert.alert("Erreur", (error as Error).message);
     }
   };
 
@@ -89,9 +93,9 @@ const Step3 = ({ nextStep }) => {
 
       <View className="flex-row justify-between mt-4">
         <TouchableOpacity
-          onPress={() => handleTypeSelection("dog")}
+          onPress={() => handleTypeSelection("chien")}
           className={`bg-white p-3 rounded-2xl flex items-center justify-center px-7 ${
-            selectedType === "dog" ? "border-[1.5px] border-secondary" : ""
+            selectedType === "chien" ? "border-[1.5px] border-secondary" : ""
           }`}
         >
           <Image source={icons.dog} className="w-[30px] h-[30px]" />
@@ -166,7 +170,7 @@ const Step3 = ({ nextStep }) => {
       <View className="flex mt-4 space-y-4">
         <CustomButton
           title="Passer cette étape"
-          handlePress={nextStep}
+          handlePress={skipStep}
           containerStyles="bg-white text-black py-3 rounded-lg"
           textStyles="text-center"
         />

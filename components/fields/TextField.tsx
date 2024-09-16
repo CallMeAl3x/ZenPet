@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
-import { ITextField } from "../../types/ITextField";
+import { ITextField } from "../../app/(types)/ITextField";
 
 const TextField: React.FC<ITextField> = ({
   title,
