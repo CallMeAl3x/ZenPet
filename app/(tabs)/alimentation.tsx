@@ -2,8 +2,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View } from "react-native";
 
 import { SearchInput } from "../../components";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Alimentation = () => {
+  const { user } = useGlobalContext();
+
   return (
     <SafeAreaView className="bg-primary min-h-screen">
       <View className="flex space-y-6 px-6">
@@ -13,6 +16,12 @@ const Alimentation = () => {
               Besoin de quoi aujourd'hui ?
             </Text>
           </View>
+        </View>
+
+        <View>
+          <Text className="text-white text-base font-rsemibold">
+            Suggestions alimentaires - {user?.username}
+          </Text>
         </View>
 
         <SearchInput />

@@ -1,10 +1,16 @@
 # ZenPet
 
-ZenPet is a mobile application designed to help pet owners manage their pets' information and activities. // NEEDS UPDATE
+ZenPet: Your All-in-One Pet Companion
+
+ZenPet is a comprehensive mobile application that revolutionizes pet care management.
+
+Developed with Expo and NativeWind, ZenPet features an intuitive and elegant interface, designed to simplify pet owners' lives while connecting a community of pet enthusiasts and service providers.
 
 ## Features
 
-// INCOMING
+Pet care management
+Booking services (pet sitting, walking, grooming)
+Marketplace for pet products
 
 ## Installation
 
@@ -43,11 +49,12 @@ To run the app on any platform (Android, iOS, or web):
 - [ ] Subscription part
 - [ ] Make a email verification system
 - [ ] Optimize performance
+- [ ] Handle the avatar part
 
 ## WHATS DONE
 
 - [x] Being able to delete pets
-- [x] Being able to change personnal informations (like password, nickname, etc)
+- [x] Being able to change personnal informations (like password, username, first and lastname)
 - [x] Implement user authentication
 - [x] Being able to update/add pets
 - [x] Being able to navigate easily

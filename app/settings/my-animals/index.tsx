@@ -21,7 +21,6 @@ import { icons } from "../../../constants";
 import TextField from "../../../components/fields/TextField";
 import DateTimeField from "../../../components/fields/DateTimeField";
 import NumberField from "../../../components/fields/NumberField";
-import GoBackButton from "../../../components/GoBackButton";
 
 const MyAnimals = () => {
   const [pets, setPets] = useState<Pet[]>([]);
@@ -173,7 +172,6 @@ const MyAnimals = () => {
   return (
     <SafeAreaView className="bg-primary h-screen">
       <View className="px-5 mt-6">
-        <GoBackButton link={"/compte"} />
         <Text className="text-2xl font-bold text-white mb-4 mt-6">
           Mes animaux
         </Text>

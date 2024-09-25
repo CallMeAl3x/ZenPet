@@ -9,7 +9,7 @@ const SearchInput = ({ initialQuery }: { initialQuery: string }) => {
   const [query, setQuery] = useState(initialQuery || "");
 
   return (
-    <View className="flex flex-row items-center space-x-3 w-full h-16 px-4 bg-white rounded-[8px] border-2 focus:border-secondary">
+    <View className="flex flex-row items-center space-x-3 w-full h-16 px-4 bg-white rounded-[8px] border-2 focus:border-secondary mt-4">
       <TouchableOpacity
         onPress={() => {
           if (query === "")

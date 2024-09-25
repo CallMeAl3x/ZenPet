@@ -8,6 +8,7 @@ import { getCurrentUser, signIn } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import TextField from "../../components/fields/TextField";
 import PasswordField from "../../components/fields/PasswordField";
+import Toast from "react-native-toast-message";
 
 const SignIn = () => {
   const { setUser, setIsLogged } = useGlobalContext();
@@ -30,10 +31,18 @@ const SignIn = () => {
       setUser(result);
       setIsLogged(true);
 
-      Alert.alert("Success", "User signed in successfully");
+      Toast.show({
+        type: "success",
+        text1: "Success",
+        text2: "Vous êtes connecté !",
+      });
       router.replace("/alimentation");
     } catch (error) {
-      Alert.alert("Error", (error as Error).message);
+      Toast.show({
+        type: "error",
+        text1: "Error",
+        text2: (error as Error).message,
+      });
     } finally {
       setSubmitting(false);
     }

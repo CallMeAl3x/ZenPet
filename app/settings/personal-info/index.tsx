@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import GoBackButton from "../../../components/GoBackButton";
 import TextField from "../../../components/fields/TextField";
 import DateTimeField from "../../../components/fields/DateTimeField";
 import { getCurrentUser, updateUser } from "../../../lib/appwrite";
 import Toast from "react-native-toast-message";
+import { useGlobalContext } from "../../../context/GlobalProvider";
 
 type FormData = {
   userId: string;
@@ -58,6 +58,8 @@ const PersonalInfo = () => {
   useEffect(() => {
     loadUserData();
   }, []);
+
+  const { user } = useGlobalContext();
 
   const loadUserData = async () => {
     try {
@@ -108,7 +110,7 @@ const PersonalInfo = () => {
         email: formData.email,
         username: formData.username,
         birthdayDate: formData.birthDate,
-        avatar: null, // Add the 'avatar' property with a default value
+        avatar: user.avatar, // Add the 'avatar' property with a default value
       });
 
       if (updatedUser) {
@@ -138,7 +140,6 @@ const PersonalInfo = () => {
     <SafeAreaView className="bg-primary h-full">
       <ScrollView className="px-5">
         <View className="mt-1">
-          <GoBackButton link={"/compte"} />
           <View className="mt-4">
             <Text className="text-white text-xl font-rsemibold">
               Informations personnelles
@@ -147,6 +148,16 @@ const PersonalInfo = () => {
         </View>
 
         <View className="mt-6">
+          <Text className="font-rsemibold text-lg text-white mb-1 mt-3">
+            Surnom
+          </Text>
+          <TextField
+            placeholder=""
+            value={formData.username}
+            handleChangeText={(text) => handleChange("username", text)}
+            error={newErrors.username}
+            otherStyles="mb-3"
+          />
           <Text className="font-rsemibold text-lg text-white mb-1">Prénom</Text>
           <TextField
             placeholder=""
