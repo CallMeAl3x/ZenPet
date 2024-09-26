@@ -34,9 +34,10 @@ Marketplace for pet products
 ## Usage
 
 To run the app on any platform (Android, iOS, or web):
-`sh
-    npx expo start
-    `
+
+```sh
+npx expo start
+```
 
 ## Project Structure
 
@@ -53,7 +54,8 @@ To run the app on any platform (Android, iOS, or web):
 
 ## WHATS DONE
 
-- [x] Homepage (almost !)
+- [x] Homepage (no backend yet)
+- [x] Messages (no backend yet)
 - [x] Being able to delete pets
 - [x] Being able to change personnal informations (like password, username, first and lastname)
 - [x] Implement user authentication
