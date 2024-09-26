@@ -1,28 +1,29 @@
-import services from "../assets/icons/services.png";
-import mail from "../assets/icons/mail.png";
-import alimentation from "../assets/icons/alimentation.png";
-import messages from "../assets/icons/messages.png";
-import plus from "../assets/icons/plus.png";
-import compte from "../assets/icons/compte.png";
-import leftArrow from "../assets/icons/left-arrow.png";
-import menu from "../assets/icons/menu.png";
-import search from "../assets/icons/search.png";
-import upload from "../assets/icons/upload.png";
-import rightArrow from "../assets/icons/right-arrow.png";
-import logout from "../assets/icons/logout.png";
-import eyeHide from "../assets/icons/eye-hide.png";
-import eye from "../assets/icons/eye.png";
-import play from "../assets/icons/play.png";
-import close from "../assets/icons/close.png";
-import calendar from "../assets/icons/calendar.png";
-import dog from "../assets/icons/dog.png";
-import cat from "../assets/icons/cat.png";
-import notification from "../assets/icons/notification.png";
-import suivis from "../assets/icons/suivis.png";
-import animalPaw from "../assets/icons/animal-paw.png";
-import personalInfo from "../assets/icons/personal-info.png";
-import home from "../assets/icons/home.png";
-import avatar from "../assets/icons/avatar.png";
+import services from "../assets/icons/services.webp";
+import mail from "../assets/icons/mail.webp";
+import alimentation from "../assets/icons/alimentation.webp";
+import messages from "../assets/icons/messages.webp";
+import plus from "../assets/icons/plus.webp";
+import compte from "../assets/icons/compte.webp";
+import leftArrow from "../assets/icons/left-arrow.webp";
+import menu from "../assets/icons/menu.webp";
+import search from "../assets/icons/search.webp";
+import upload from "../assets/icons/upload.webp";
+import rightArrow from "../assets/icons/right-arrow.webp";
+import logout from "../assets/icons/logout.webp";
+import eyeHide from "../assets/icons/eye-hide.webp";
+import eye from "../assets/icons/eye.webp";
+import play from "../assets/icons/play.webp";
+import close from "../assets/icons/close.webp";
+import calendar from "../assets/icons/calendar.webp";
+import dog from "../assets/icons/dog.webp";
+import cat from "../assets/icons/cat.webp";
+import notification from "../assets/icons/notification.webp";
+import suivis from "../assets/icons/suivis.webp";
+import animalPaw from "../assets/icons/animal-paw.webp";
+import personalInfo from "../assets/icons/personal-info.webp";
+import home from "../assets/icons/home.webp";
+import avatar from "../assets/icons/avatar.webp";
+import friends from "../assets/icons/friends.webp";
 
 export default {
   play,
@@ -50,4 +51,5 @@ export default {
   personalInfo,
   home,
   avatar,
+  friends,
 };
