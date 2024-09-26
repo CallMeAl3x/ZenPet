@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import { View, Image, TouchableOpacity, Text, Pressable } from "react-native";
 
 import { icons } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
@@ -20,6 +20,10 @@ const Compte = () => {
 
     router.replace("/sign-in");
   };
+
+  const handlePress = () => {
+    router.replace("/settings/personal-info");
+  };
   return (
     <GestureHandlerRootView>
       <SafeAreaView className="bg-primary h-full items-center flex">
@@ -31,27 +35,29 @@ const Compte = () => {
           }}
           className="w-full"
         >
-          <View className="flex w-full px-1 flex-row items-center">
-            <View className="justify-start items-start">
-              <Image
-                source={{ uri: user?.avatar }}
-                className="w-24 h-24 rounded-full"
-                resizeMode="contain"
-              />
+          <Pressable onPress={handlePress}>
+            <View className="flex w-full px-1 flex-row items-center">
+              <View className="justify-start items-start">
+                <Image
+                  source={{ uri: user?.avatar }}
+                  className="w-24 h-24 rounded-full"
+                  resizeMode="contain"
+                />
+              </View>
+              <View className="flex flex-col ml-3 flex-1">
+                <Text className="font-rbold text-[28px] text-white">
+                  {user?.firstName}
+                </Text>
+                <Text
+                  className="font-rsemibold text-base text-[#A8D5BA]"
+                  numberOfLines={2}
+                  ellipsizeMode="tail"
+                >
+                  {user?.email}
+                </Text>
+              </View>
             </View>
-            <View className="flex flex-col ml-3 flex-1">
-              <Text className="font-rbold text-[28px] text-white">
-                {user?.firstName}
-              </Text>
-              <Text
-                className="font-rsemibold text-base text-[#A8D5BA]"
-                numberOfLines={2}
-                ellipsizeMode="tail"
-              >
-                {user?.email}
-              </Text>
-            </View>
-          </View>
+          </Pressable>
 
           {/* Partie paramètres/transactions */}
           <View className="w-full mt-10">

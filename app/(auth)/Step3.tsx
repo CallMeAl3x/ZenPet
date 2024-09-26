@@ -33,7 +33,7 @@ const Step3 = ({ nextStep }: { nextStep: () => void }) => {
 
   const skipStep = async () => {
     setIsLogged(true); // Set isLogged to true after completing Step 3
-    router.replace("/alimentation");
+    router.replace("/accueil");
   };
 
   const handleTypeSelection = (type: string) => {
@@ -73,7 +73,7 @@ const Step3 = ({ nextStep }: { nextStep: () => void }) => {
         "Votre animal de compagnie a été ajouté avec succès !"
       );
       setIsLogged(true); // Set isLogged to true after completing Step 3
-      router.replace("/alimentation"); // Redirect to home after completing Step 3
+      router.replace("/accueil"); // Redirect to home after completing Step 3
     } catch (error) {
       Alert.alert("Erreur", (error as Error).message);
     }

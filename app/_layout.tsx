@@ -5,6 +5,10 @@ import { SplashScreen, Stack } from "expo-router";
 
 import GlobalProvider from "../context/GlobalProvider";
 import Toast from "react-native-toast-message";
+import {
+  NavigationProvider,
+  useNavigationHistory,
+} from "../components/NavigationProvider";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -48,18 +52,30 @@ const RootLayout = () => {
   }
 
   return (
-    <GlobalProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false, // Hide the header for all screens
-        }}
-      >
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="index" />
-      </Stack>
-      <Toast />
-    </GlobalProvider>
+    <NavigationProvider>
+      <GlobalProvider>
+        <InnerRootLayout />
+        <Toast />
+      </GlobalProvider>
+    </NavigationProvider>
+  );
+};
+
+const InnerRootLayout = () => {
+  const { isGoingBack } = useNavigationHistory();
+
+  return (
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        animation: isGoingBack ? "slide_from_left" : "slide_from_right",
+        animationDuration: 300,
+      }}
+    >
+      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="(auth)" />
+      <Stack.Screen name="index" />
+    </Stack>
   );
 };
 

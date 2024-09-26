@@ -36,7 +36,7 @@ const SignIn = () => {
         text1: "Success",
         text2: "Vous êtes connecté !",
       });
-      router.replace("/alimentation");
+      router.replace("/accueil");
     } catch (error) {
       Toast.show({
         type: "error",

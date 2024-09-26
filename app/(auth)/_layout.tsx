@@ -9,7 +9,7 @@ const AuthLayout = () => {
     isLogged: boolean;
   };
 
-  if (!loading && isLogged) return <Redirect href="/alimentation" />;
+  if (!loading && isLogged) return <Redirect href="/accueil" />;
 
   return (
     <>

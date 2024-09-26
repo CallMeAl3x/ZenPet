@@ -53,11 +53,12 @@ To run the app on any platform (Android, iOS, or web):
 
 ## WHATS DONE
 
+- [x] Homepage (almost !)
 - [x] Being able to delete pets
 - [x] Being able to change personnal informations (like password, username, first and lastname)
 - [x] Implement user authentication
 - [x] Being able to update/add pets
-- [x] Being able to navigate easily
+- [x] Being able to navigate easily (Improved gesture controls)
 - [x] Make it typesafe
 
 ## Contributing

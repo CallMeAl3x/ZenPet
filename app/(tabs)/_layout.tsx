@@ -7,7 +7,14 @@ import { Loader } from "../../components";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import Header from "../../components/Header";
 
-const TabIcon = ({ icon, color, name, focused }) => {
+interface TabIconProps {
+  icon: any;
+  color: string;
+  name: string;
+  focused: boolean;
+}
+
+const TabIcon = ({ icon, color, name, focused }: TabIconProps) => {
   return (
     <View className="flex items-center justify-center gap-2">
       <Image
@@ -51,14 +58,14 @@ const TabLayout = () => {
         }}
       >
         <Tabs.Screen
-          name="alimentation"
+          name="accueil"
           options={{
-            title: "Alimentation",
+            title: "Accueil",
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.alimentation}
+                icon={icons.home}
                 color={color}
-                name="Alimentation"
+                name="Accueil"
                 focused={focused}
               />
             ),
@@ -80,14 +87,14 @@ const TabLayout = () => {
         />
 
         <Tabs.Screen
-          name="suivis"
+          name="alimentation"
           options={{
-            title: "Suivis",
+            title: "Alimentation",
             tabBarIcon: ({ color, focused }) => (
               <TabIcon
-                icon={icons.suivis}
+                icon={icons.alimentation}
                 color={color}
-                name="Suivis"
+                name="Alimentation"
                 focused={focused}
               />
             ),

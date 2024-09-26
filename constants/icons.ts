@@ -21,6 +21,7 @@ import notification from "../assets/icons/notification.png";
 import suivis from "../assets/icons/suivis.png";
 import animalPaw from "../assets/icons/animal-paw.png";
 import personalInfo from "../assets/icons/personal-info.png";
+import home from "../assets/icons/home.png";
 
 export default {
   play,
@@ -46,4 +47,5 @@ export default {
   suivis,
   animalPaw,
   personalInfo,
+  home,
 };
