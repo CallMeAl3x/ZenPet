@@ -41,7 +41,7 @@ const Compte = () => {
                 <Image
                   source={{ uri: user?.avatar }}
                   className="w-24 h-24 rounded-full"
-                  resizeMode="contain"
+                  resizeMode="cover"
                 />
               </View>
               <View className="flex flex-col ml-3 flex-1">

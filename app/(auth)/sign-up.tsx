@@ -21,6 +21,7 @@ const SignUp = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    avatar: "",
   });
 
   const nextStep = () => {
@@ -57,6 +58,7 @@ const SignUp = () => {
         firstName: form.firstName,
         lastName: form.lastName,
         birthdayDate: form.birthdayDate,
+        avatar: form.avatar,
       });
 
       setUser(result);

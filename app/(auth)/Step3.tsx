@@ -10,7 +10,7 @@ import {
 import { CustomButton } from "../../components";
 import { icons } from "../../constants";
 import { useGlobalContext } from "../../context/GlobalProvider";
-import { addPet, getCurrentUser } from "../../lib/appwrite";
+import { addPet } from "../../lib/appwrite";
 import NumberField from "../../components/fields/NumberField";
 import TextField from "../../components/fields/TextField";
 import DateTimeField from "../../components/fields/DateTimeField";

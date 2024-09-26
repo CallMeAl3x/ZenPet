@@ -1,24 +1,8 @@
-import { Stack, useRouter } from "expo-router";
-import { useEffect } from "react";
-import { BackHandler } from "react-native";
+import { Stack } from "expo-router";
 import Header from "../../components/Header";
 import { StatusBar } from "expo-status-bar";
 
 export default function SettingsLayout() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      () => {
-        router.push("/compte");
-        return true;
-      }
-    );
-
-    return () => backHandler.remove();
-  }, []);
-
   return (
     <>
       <Header />

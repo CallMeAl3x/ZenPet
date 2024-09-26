@@ -15,7 +15,6 @@ const NotFound = () => {
         text1: "Page introuvable",
         text2: "Vous allez être redirigé vers l'accueil",
         onPress: () => {
-          // Handle the onPress event
           router.replace("/accueil");
           setHasRedirected(true);
         },
@@ -24,7 +23,7 @@ const NotFound = () => {
       const timer = setTimeout(() => {
         router.replace("/accueil");
         setHasRedirected(true);
-      }, 100000);
+      }, 3000);
 
       return () => clearTimeout(timer);
     }

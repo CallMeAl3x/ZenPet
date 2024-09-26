@@ -71,12 +71,12 @@ const Accueil = () => {
 
           <SearchInput initialQuery={""} />
 
-          <View className="flex items-center">
+          <View className="flex justify-between w-full flex-row items-center">
             <Text className="text-white text-base font-rsemibold">
               Suggestions alimentaires - {user?.username}{" "}
-              <Text className="text-white font-rsemibold underline text-[10px]">
-                Tout afficher
-              </Text>
+            </Text>
+            <Text className="text-white font-rsemibold underline text-[10px] mr-1">
+              Tout afficher
             </Text>
           </View>
 

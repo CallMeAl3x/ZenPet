@@ -219,7 +219,7 @@ const MyAnimals = () => {
           resetForm();
         }}
       >
-        <View className="flex-1 justify-end bg-black bg-opacity-50">
+        <View className="flex-1 justify-end bg-transparent/30">
           <View className="bg-white rounded-t-3xl p-5 h-5/6">
             <ScrollView>
               <Text className="text-2xl font-semibold mb-4">

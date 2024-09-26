@@ -1,8 +1,11 @@
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import { CustomButton } from "../../components";
-import TextField from "../../components/fields/TextField";
+import * as ImagePicker from "expo-image-picker";
 import DateTimeField from "../../components/fields/DateTimeField";
 import PasswordField from "../../components/fields/PasswordField";
+import Toast from "react-native-toast-message";
+import { icons } from "../../constants";
+import TextField from "../../components/fields/TextField";
 
 interface Step2Props {
   form: any;
@@ -21,11 +24,60 @@ const Step2 = ({
   prevStep,
   submit,
 }: Step2Props) => {
+  const avatarUri = form.avatar || null;
+
+  const openPicker = async () => {
+    try {
+      // Demander la permission d'accéder à la galerie
+      const permissionResult =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (permissionResult.granted === false) {
+        Toast.show({
+          type: "error",
+          text1: "Erreur",
+          text2: "Permission d'accès à la galerie refusée.",
+        });
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        aspect: [4, 3],
+        quality: 1,
+        selectionLimit: 1,
+      });
+
+      if (!result.canceled) {
+        setForm((prevData: any) => ({
+          ...prevData,
+          avatar: result.assets[0].uri,
+        }));
+      }
+    } catch (error) {
+      Toast.show({
+        type: "error",
+        text1: "Erreur",
+        text2: "Échec de la sélection de l'image. Veuillez réessayer.",
+      });
+    }
+  };
+
   return (
     <ScrollView className="flex-1 bg-primary px-5">
       <Text className="text-2xl font-psemibold text-white mt-6 mb-4">
         Inscription
       </Text>
+
+      <TouchableOpacity onPress={openPicker}>
+        <Image
+          source={form.avatar ? { uri: form.avatar } : icons.avatar}
+          className="w-24 h-24 rounded-full self-center mb-4"
+          resizeMode="cover"
+        />
+        <Text className="text-center text-white text-base font-rsemibold mb-4">
+          {avatarUri ? "Modifier l'avatar" : "Ajouter un avatar"}
+        </Text>
+      </TouchableOpacity>
 
       <TextField
         title="Prénom"
