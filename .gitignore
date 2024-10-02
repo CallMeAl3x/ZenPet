@@ -45,3 +45,8 @@ yarn-error.*
 
 # EAS configuration
 eas.json
+
+# android / IOS
+
+android/
+ios/
