@@ -1,13 +1,13 @@
 import { Text, View } from "react-native";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import TabItem from "../../components/TabItem";
 import MessageList from "../../components/MessageList";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Messages = () => {
-  const [activeTab, setActiveTab] = useState("messages");
+  const [activeTab, setActiveTab] = useState<string>("messages");
 
-  const handleTabChange = (tab: SetStateAction<string>) => {
+  const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
 

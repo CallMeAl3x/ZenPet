@@ -10,26 +10,26 @@ const MessageList = () => {
   const messages = [
     {
       text: "Je suis le message",
-      avatar: user.avatar,
-      user: user.firstName,
+      avatar: user?.avatar,
+      user: user?.firstName,
       link: "messages/user",
     },
     {
       text: "Je suis le message",
-      avatar: user.avatar,
-      user: user.firstName,
+      avatar: user?.avatar,
+      user: user?.firstName,
       link: "messages/user",
     },
     {
       text: "Je suis le message",
-      avatar: user.avatar,
-      user: user.firstName,
+      avatar: user?.avatar,
+      user: user?.firstName,
       link: "messages/user",
     },
     {
       text: "Je suis le message",
-      avatar: user.avatar,
-      user: user.firstName,
+      avatar: user?.avatar,
+      user: user?.firstName,
       link: "messages/user",
     },
   ];
