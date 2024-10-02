@@ -15,7 +15,7 @@ const AccountOption = ({ texte, icon, style, link }: AccountOptionProps) => {
     <TouchableOpacity onPress={() => router.replace("/settings/" + link)}>
       <View className="flex flex-col w-full">
         <View className={`flex mt-3 flex-row items-center w-full ${style}`}>
-          <Image source={icon} className="h-5 w-5" />
+          <Image source={icon} className="h-5 w-5" resizeMode="contain" />
           <Text className="font-rmedium text-base text-white ml-2.5">
             {texte}
           </Text>

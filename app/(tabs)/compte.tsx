@@ -96,6 +96,12 @@ const Compte = () => {
                   style="mt-6"
                   link="personal-info"
                 />
+                <AccountOption
+                  icon={icons.friends}
+                  texte="Mes amis"
+                  style="mt-6"
+                  link="friends"
+                />
               </View>
             </View>
           </View>
